@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 23 13:29:37 2019
-
-@author: liam.bui
-
-This file contains functions to train and evaluate convolutional neural networks
-"""
 
 import os
 import sys
@@ -45,11 +38,7 @@ from utils import config
 
 
 def convert_mol_to_graph(mol):
-    """
-    Convert RDKit mol into a graph representation atoms are nodes, and bonds are vertices store as networkx graph
-    :param mol: RDKit mol
-    :return G: networkx graph
-    """
+    
     G = nx.Graph()
     for atom in mol.GetAtoms():
         G.add_node(atom.GetIdx(), atomic_num=atom.GetAtomicNum())
@@ -61,12 +50,7 @@ def convert_mol_to_graph(mol):
 
 
 def generate_graph_matrices(graphs, auto_pad=False):
-    """
-    Generate A, X, E matrix from smiles
-    :param graphs: list of networkx graphs
-    :param auto_pad: bool. whether to pad the node matrix to have the same length
-    :return A, X, E
-    """ 
+    
     
     A, X, E = nx_to_numpy(graphs, nf_keys=['atomic_num'],
                                ef_keys=['bond_type'], auto_pad=auto_pad, self_loops=True)
@@ -81,18 +65,6 @@ def generate_graph_matrices(graphs, auto_pad=False):
     
 def build_gcn_model(trainset, testset, nb_node_features, nb_classes=1, batch_size=32, nb_epochs=100, lr=0.001,
                      save_path=None):
-    """Build a Graph Convolutional Network model
-    :param trainset: [A_train, X_train, y_train]
-    :param testset: [A_test, X_test, y_test]
-    :param nb_node_features: int, number of node features
-    :param nb_classes: int, number of output classes
-    :param batch_size: int, batch size for model training
-    :param nb_epochs: int, number of training epoches
-    :param lr: float, learning rate
-    :param save_path: path to save model
-    :return model: fitted Keras model
-    :return scores: dict, scores on test set for the fitted Keras model
-    """ 
     
     # Create model architecture
     X_in = Input(batch_shape=(None, nb_node_features))
@@ -204,20 +176,7 @@ def build_gcn_model(trainset, testset, nb_node_features, nb_classes=1, batch_siz
 
 def build_ecn_model(trainset, testset, nb_nodes, nb_node_features, nb_edge_features, nb_classes=1,
                     batch_size=32, nb_epochs=100, lr=0.001, save_path=None):
-    """Build an Edge Convolutional Network model
-    :param trainset: [X_train, A_train, E_train, y_train]
-    :param testset: [X_test, A_test, E_test, y_test]
-    :param nb_nodes: int, number of nodes in a graph (after auto-pad)
-    :param nb_node_features: int, number of node features
-    :param nb_edge_features: int, number of edge features
-    :param nb_classes: int, number of output classes
-    :param batch_size: int, batch size for model training
-    :param nb_epochs: int, number of training epoches
-    :param lr: float, learning rate
-    :param save_path: path to save model
-    :return model: fitted Keras model
-    :return scores: dict, scores on test set for the fitted Keras model
-    """ 
+    
     
     # Create model architecture
     X_in = Input(shape=(nb_nodes, nb_node_features))

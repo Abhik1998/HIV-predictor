@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Oct 13 17:12:29 2019
-
-@author: liam.bui
-
-This file contains functions to extract different "hand-crafted" features for images
-"""
 
 import numpy as np
 from sklearn.feature_selection import chi2
@@ -21,13 +14,7 @@ from rdkit.Chem.Pharm2D.SigFactory import SigFactory
 ## 1D descriptors ##
 ####################
 def extract_properties(column, include_3D=False):
-    """Extract various 1D descriptors
-    https://www.rdkit.org/docs/GettingStartedInPython.html#list-of-available-descriptors
     
-    :param column: Pandas Series, containing smiles or RDKit mol object
-    :param from_smiles: bool, indicate whether column contains smiles string
-    :return: feature_properties: Pandas Series, containing 1D descriptors
-    """
 
     def extract(x, from_smiles):
         if from_smiles:

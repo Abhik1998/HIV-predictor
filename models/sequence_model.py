@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 23 13:29:37 2019
-
-@author: liam.bui
-
-This file contains functions to train and evaluate convolutional neural networks
-"""
 
 import os
 import sys
@@ -40,14 +33,7 @@ from utils import config
 
 
 def generate_tokens(smiles, len_percentile=100):
-    """
-    Generate character tokens from smiles
-    :param smiles: Pandas series, containing smiles
-    :param len_percentile: percentile of smiles length to set as max length
-    :return tokens
-    :return num_words
-    :return max_phrase_len
-    """ 
+    
     
     # Get max length of smiles
     smiles_len = smiles.apply(lambda p: len(p))
@@ -74,13 +60,7 @@ def generate_tokens(smiles, len_percentile=100):
     
     
 def create_model(model_type, num_words, input_length, output_dim=1, dropout_rate=0.0):
-    """Build different sequence model
-    :param model_type: str, can be 'cnn-gru', 'cnn', 'gru', 'lstm'
-    :param num_words: int
-    :param input_length: int
-    :param output_dim: int
-    :return model: Keras model
-    """ 
+    
     
     model = Sequential()
     if model_type == 'lstm': # LSTM - LSTM

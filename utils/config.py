@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Oct 13 15:10:54 2019
-
-@author: liam.bui
-
-The file contains configuration and shared variables
-
-"""
 
 ##########################
 ## FOLDER STURCTURE ######
 ##########################
-WORK_DIRECTORY = 'C:/Users/liam.bui/Desktop/drug-efficacy/'
+WORK_DIRECTORY = '/drug-efficacy/'
 DATA_FILE = 'HIV.csv'
 
 ##########################
